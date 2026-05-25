@@ -1,0 +1,29 @@
+# Secrets
+kaggle.json
+.env
+
+# Data and generated artifacts
+data/raw/
+data/processed/
+artifacts/
+results/
+reports/figures/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
