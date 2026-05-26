@@ -30,13 +30,15 @@
   **EN:** The 70/15/15 `TransactionDT` split completed: train `413,378`, validation `88,581`, test `88,581`.
 - **VI:** Preprocessing fit trên train-only đã chạy xong, gồm numeric imputation, categorical `"missing"`/rare handling, loại `TransactionID`/`isFraud`, và 3 feature time-derived từ `TransactionDT`.  
   **EN:** Train-only preprocessing completed with numeric imputation, categorical `"missing"`/rare handling, exclusion of `TransactionID`/`isFraud`, and 3 time-derived `TransactionDT` features.
+- **VI:** Phase 2 đã tạo notebook baseline ML `notebooks/02_baselines_cost_metrics.ipynb` với approve-all, Logistic Regression class weight, baseline mạnh LightGBM/XGBoost hoặc Random Forest fallback, threshold tuning validation-only, và cost metrics.  
+  **EN:** Phase 2 created the ML baseline notebook `notebooks/02_baselines_cost_metrics.ipynb` with approve-all, Logistic Regression class weight, a stronger LightGBM/XGBoost or Random Forest fallback baseline, validation-only threshold tuning, and cost metrics.
+- **VI:** Smoke run Phase 2 trên 10,000 dòng đã tạo `results/baseline_metrics.csv`, `results/threshold_tuning.csv`, và các hình PR/ROC/cost/confusion matrix.  
+  **EN:** The Phase 2 10,000-row smoke run generated `results/baseline_metrics.csv`, `results/threshold_tuning.csv`, and PR/ROC/cost/confusion-matrix figures.
+- **VI:** Phase 2.1 đã thêm baseline `xgboost_magic_style` với 19 feature magic-style leakage-safe, gồm count/frequency encoding và `TransactionAmt` group stats fit trên train-only.  
+  **EN:** Phase 2.1 added the `xgboost_magic_style` baseline with 19 leakage-safe magic-style features, including count/frequency encoding and train-only `TransactionAmt` group stats.
 
 ### Đang làm / Active
 
-- **VI:** Có Logistic Regression và một baseline Random Forest/LightGBM/XGBoost.  
-  **EN:** Include Logistic Regression and one Random Forest/LightGBM/XGBoost baseline.
-- **VI:** Có imbalance handling bằng class weight, threshold tuning, hoặc undersampling.  
-  **EN:** Include imbalance handling via class weight, threshold tuning, or undersampling.
 - **VI:** Có table-to-text trung lập từ feature thật.  
   **EN:** Include neutral table-to-text serialization from real features.
 - **VI:** Có local embedding bằng `sentence-transformers/all-MiniLM-L6-v2`.  
@@ -106,7 +108,7 @@
 | Left join identity vào transaction / Left join identity into transaction | Giữ tất cả giao dịch có label, identity missing là tín hiệu hợp lệ / Keeps all labeled transactions; missing identity is valid information | Validated in Phase 1 |
 | MiniLM local embedding | Giảm chi phí, không phụ thuộc API, phù hợp 1 tháng / Low cost, no API dependency, feasible in 1 month | Pending |
 | Contextual bandit thay vì PPO/A2C / Contextual bandit instead of PPO/A2C | Giao dịch là quyết định one-step, đơn giản và giải thích được / Transactions are one-step decisions; simpler and explainable | Pending |
-| Total Cost/Cost Saving là metric chính / Total Cost and Cost Saving as main metrics | Phù hợp cost-sensitive fraud detection hơn Accuracy / Better aligned with cost-sensitive fraud detection than Accuracy | Pending |
+| Total Cost/Cost Saving là metric chính / Total Cost and Cost Saving as main metrics | Phù hợp cost-sensitive fraud detection hơn Accuracy / Better aligned with cost-sensitive fraud detection than Accuracy | Implemented for ML baselines in Phase 2 and Phase 2.1 |
 
 ## Evolution
 
@@ -126,4 +128,4 @@ After each milestone:
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-25 after Phase 1 verification*
+*Last updated: 2026-05-26 after Phase 2.1 smoke-verified implementation*

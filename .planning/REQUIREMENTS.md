@@ -22,11 +22,11 @@
 
 ### Baselines / Mô hình baseline
 
-- [ ] **BASE-01**: **VI:** Có approve-all baseline để tính cost reference. **EN:** Include an approve-all baseline as the cost reference.
-- [ ] **BASE-02**: **VI:** Có Logistic Regression baseline. **EN:** Include a Logistic Regression baseline.
-- [ ] **BASE-03**: **VI:** Có Random Forest hoặc LightGBM/XGBoost baseline. **EN:** Include a Random Forest or LightGBM/XGBoost baseline.
-- [ ] **BASE-04**: **VI:** Có imbalance handling bằng class weight, threshold tuning, hoặc undersampling. **EN:** Include imbalance handling via class weight, threshold tuning, or undersampling.
-- [ ] **BASE-05**: **VI:** Có threshold tuning trên validation để minimize Total Cost. **EN:** Include validation-based threshold tuning to minimize Total Cost.
+- [x] **BASE-01**: **VI:** Có approve-all baseline để tính cost reference. **EN:** Include an approve-all baseline as the cost reference.
+- [x] **BASE-02**: **VI:** Có Logistic Regression baseline. **EN:** Include a Logistic Regression baseline.
+- [x] **BASE-03**: **VI:** Có Random Forest hoặc LightGBM/XGBoost baseline. **EN:** Include a Random Forest or LightGBM/XGBoost baseline.
+- [x] **BASE-04**: **VI:** Có imbalance handling bằng class weight, threshold tuning, hoặc undersampling. **EN:** Include imbalance handling via class weight, threshold tuning, or undersampling.
+- [x] **BASE-05**: **VI:** Có threshold tuning trên validation để minimize Total Cost. **EN:** Include validation-based threshold tuning to minimize Total Cost.
 
 ### LLM Representation / Biểu diễn LLM
 
@@ -87,11 +87,11 @@
 | PREP-02 | Phase 1 | Complete |
 | PREP-03 | Phase 1 | Complete |
 | PREP-04 | Phase 1 | Complete |
-| BASE-01 | Phase 2 | Pending |
-| BASE-02 | Phase 2 | Pending |
-| BASE-03 | Phase 2 | Pending |
-| BASE-04 | Phase 2 | Pending |
-| BASE-05 | Phase 2 | Pending |
+| BASE-01 | Phase 2 | Complete |
+| BASE-02 | Phase 2 | Complete |
+| BASE-03 | Phase 2 | Complete |
+| BASE-04 | Phase 2 | Complete |
+| BASE-05 | Phase 2 | Complete |
 | LLM-01 | Phase 3 | Pending |
 | LLM-02 | Phase 3 | Pending |
 | LLM-03 | Phase 3 | Pending |
@@ -114,4 +114,4 @@
 
 ---
 *Requirements defined: 2026-05-24*
-*Last updated: 2026-05-25 after Phase 1 verification*
+*Last updated: 2026-05-26 after Phase 2 smoke-verified implementation*

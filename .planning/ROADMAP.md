@@ -6,6 +6,7 @@
 |---:|---|---|---|
 | 1 | Data Pipeline and EDA | VI: Join, làm sạch, chia split, và hiểu IEEE-CIS mà không gây leakage. EN: Join, clean, split, and understand IEEE-CIS without leakage. | DATA-01..05, PREP-01..04 |
 | 2 | ML Baselines and Cost Metrics | VI: Xây dựng baseline ML và đánh giá threshold cost-sensitive. EN: Build ML baselines and cost-sensitive threshold evaluation. | BASE-01..05 |
+| 2.1 | Kaggle-inspired XGB Magic Baseline (INSERTED) | VI: Tăng sức nặng supervised baseline bằng XGBoost magic-style leakage-safe trước khi qua LLM/RL. EN: Strengthen the supervised baseline with leakage-safe XGBoost magic-style features before LLM/RL. | Strengthens BASE-03..05 |
 | 3 | LLM Representation and RL | VI: Xây dựng table-to-text, MiniLM embeddings, và contextual bandit ablations. EN: Build table-to-text, MiniLM embeddings, and contextual bandit ablations. | LLM-01..04, RL-01..04 |
 | 4 | Evaluation, Error Analysis, Report | VI: Tạo final metrics, charts, error analysis, và báo cáo. EN: Produce final metrics, charts, error analysis, and report. | EVAL-01..06 |
 
@@ -32,6 +33,8 @@
 
 ## Phase 2: ML Baselines and Cost Metrics
 
+**Status / Trạng thái:** Complete / Hoàn tất — smoke verified 2026-05-26.
+
 **Goal / Mục tiêu:**  
 **VI:** Tạo điểm so sánh mạnh và cost-sensitive.  
 **EN:** Build strong and cost-sensitive comparison points.
@@ -47,9 +50,30 @@
 **Suggested files / File gợi ý:**
 
 - Primary / Chính: `notebooks/02_baselines_cost_metrics.ipynb`
-- Optional script mirrors / Script phụ trợ: `src/models/train_baselines.py`, `src/evaluation/metrics.py`
+- Optional script mirrors / Script phụ trợ: none for current execution; Phase 2 is notebook-only.
 - `results/baseline_metrics.csv`
 - `results/threshold_tuning.csv`
+
+## Phase 2.1: Kaggle-inspired XGB Magic Baseline (INSERTED)
+
+**Status / Trạng thái:** Complete / Hoàn tất — smoke verified 2026-05-26.
+
+**Goal / Mục tiêu:**  
+**VI:** Bổ sung một supervised baseline mạnh hơn, lấy cảm hứng từ cdeotte XGB Magic và các Kaggle IEEE-CIS solution, nhưng giữ leakage-safe và đánh giá theo cost-sensitive metrics của đồ án.  
+**EN:** Add a stronger supervised baseline inspired by cdeotte XGB Magic and Kaggle IEEE-CIS solutions, while keeping leakage safety and evaluating with this project's cost-sensitive metrics.
+
+**Success criteria / Tiêu chí thành công:**
+
+1. **VI:** Có XGBoost hoặc LightGBM magic-style baseline chạy trên cùng split `TransactionDT` 70/15/15. **EN:** Include an XGBoost or LightGBM magic-style baseline on the same `TransactionDT` 70/15/15 split.
+2. **VI:** Feature engineering chỉ dùng train-fitted statistics rồi map sang validation/test. **EN:** Feature engineering uses train-fitted statistics only, then maps them to validation/test.
+3. **VI:** Có count/frequency encoding và aggregation đơn giản như `card1`, `card2`, `addr1`, email domain, `card1_addr1`, và `TransactionAmt` group stats. **EN:** Include count/frequency encoding and simple aggregations for `card1`, `card2`, `addr1`, email domains, `card1_addr1`, and `TransactionAmt` group stats.
+4. **VI:** Không dùng Kaggle test files, leaderboard artifacts, full 1st-place post-processing, hoặc label leakage. **EN:** Do not use Kaggle test files, leaderboard artifacts, full 1st-place post-processing, or label leakage.
+5. **VI:** Đánh giá bằng PR-AUC, ROC-AUC, Recall/Precision/F1 fraud, FN/FP/Total Cost, và Cost Saving; FraudSquad 1st place chỉ là external SOTA reference nếu không reproduce đầy đủ. **EN:** Evaluate with PR-AUC, ROC-AUC, fraud Recall/Precision/F1, FN/FP/Total Cost, and Cost Saving; FraudSquad 1st place remains an external SOTA reference unless fully reproduced.
+
+**Suggested files / File gợi ý:**
+
+- Primary / Chính: update `notebooks/02_baselines_cost_metrics.ipynb`
+- Optional generated outputs: `results/baseline_metrics.csv`, `results/threshold_tuning.csv`, `reports/figures/`
 
 ## Phase 3: LLM Representation and RL
 
