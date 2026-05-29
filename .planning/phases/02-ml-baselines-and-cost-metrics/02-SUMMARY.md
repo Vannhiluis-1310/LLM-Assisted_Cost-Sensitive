@@ -49,11 +49,32 @@ The notebook was executed locally with `SAMPLE_ROWS = 10000`.
 
 ## Smoke Results Snapshot
 
-On the 10,000-row smoke run, `xgboost_scale_pos_weight` had the lowest test Total Cost for all three cost configurations. These are smoke-test numbers only; final report numbers should come from a full run by setting `SAMPLE_ROWS = None`.
+On the 10,000-row smoke run, `xgboost_scale_pos_weight` had the lowest test Total Cost for all three cost configurations. These are smoke-test numbers only; final report numbers should come from either matched `RUN_MODE="sample_100k"` runs for Phase 2/3 comparison or a full run when RAM allows.
 
 ## Notes and Risks
 
-- The notebook defaults to smoke mode to avoid local CPU/RAM issues.
+- The notebook now uses `RUN_MODE`; default is `"sample_100k"` for the current Colab/RAM 12GB execution plan, with `"smoke"`, `"sample_200k"`, `"sample_300k"`, and `"full"` still available.
 - Logistic Regression uses `N_JOBS = 1` by default because Windows local execution blocked `n_jobs=-1`.
 - Full dataset baseline training has not been run locally in this execution turn.
 - Phase 2 intentionally does not implement LLM embeddings, table-to-text, contextual bandit, DQN, or RL ablations.
+
+## 2026-05-27 Matched 100k Update
+
+Notebook 02 now supports `RUN_MODE = "smoke" | "sample_100k" | "full"`. In `sample_100k`, it reads the first 100,000 IEEE-CIS transaction rows, preserves the `TransactionDT` 70/15/15 split, and writes tagged outputs such as `results/baseline_metrics_sample_100k.csv`, `results/threshold_tuning_sample_100k.csv`, `results/confusion_matrices_sample_100k.csv`, and `results/phase2_run_metadata_sample_100k.json`.
+
+## 2026-05-28 Execute Update
+
+Notebook 02 is now set to `RUN_MODE = "sample_100k"` by default so the next Colab run produces the matched Phase 2 baseline required by Phase 3. The full-data path remains available by changing the same config line back to `RUN_MODE = "full"`.
+
+## 2026-05-28 Gradual Sample Ladder Update
+
+Notebook 02 now also supports `RUN_MODE = "sample_200k"` and `RUN_MODE = "sample_300k"`. These modes keep the same raw IEEE-CIS source, left join, `TransactionDT` 70/15/15 split, validation-only threshold tuning, and tagged output behavior.
+
+Recommended execution order is:
+
+1. Run notebook 02 with `sample_100k`.
+2. If it completes, run notebook 02 with `sample_200k`.
+3. If it completes, run notebook 02 with `sample_300k`.
+4. Attempt `full` only after the sample ladder is stable.
+
+Each Phase 2 sample run must be paired with the same Phase 3 sample run before making baseline-vs-RL comparison claims.

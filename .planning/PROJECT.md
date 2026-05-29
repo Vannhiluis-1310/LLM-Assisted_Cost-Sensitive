@@ -36,19 +36,11 @@
   **EN:** The Phase 2 10,000-row smoke run generated `results/baseline_metrics.csv`, `results/threshold_tuning.csv`, and PR/ROC/cost/confusion-matrix figures.
 - **VI:** Phase 2.1 đã thêm baseline `xgboost_magic_style` với 19 feature magic-style leakage-safe, gồm count/frequency encoding và `TransactionAmt` group stats fit trên train-only.  
   **EN:** Phase 2.1 added the `xgboost_magic_style` baseline with 19 leakage-safe magic-style features, including count/frequency encoding and train-only `TransactionAmt` group stats.
+- **VI:** Phase 3 đã tạo notebook `notebooks/03_llm_representation_and_rl.ipynb` với table-to-text trung lập, embedding cache, contextual bandit không embedding, contextual bandit có embedding, và `results/rl_ablation.csv` ở smoke mode.  
+  **EN:** Phase 3 created `notebooks/03_llm_representation_and_rl.ipynb` with neutral table-to-text, embedding cache, contextual bandit without embedding, contextual bandit with embedding, and `results/rl_ablation.csv` in smoke mode.
 
 ### Đang làm / Active
 
-- **VI:** Có table-to-text trung lập từ feature thật.  
-  **EN:** Include neutral table-to-text serialization from real features.
-- **VI:** Có local embedding bằng `sentence-transformers/all-MiniLM-L6-v2`.  
-  **EN:** Include local embeddings using `sentence-transformers/all-MiniLM-L6-v2`.
-- **VI:** Có contextual bandit hoặc DQN đơn giản với action `approve/block`.  
-  **EN:** Include a contextual bandit or simple DQN with `approve/block` actions.
-- **VI:** Có reward function dựa trên `TransactionAmt`, `alpha`, `beta`, phạt FN nặng hơn FP.  
-  **EN:** Include a reward function based on `TransactionAmt`, `alpha`, and `beta`, penalizing FN more heavily than FP.
-- **VI:** Có ablation RL without LLM embedding vs RL with embedding.  
-  **EN:** Include ablation: RL without LLM embedding vs RL with embedding.
 - **VI:** Có PR-AUC, Recall fraud, Precision fraud, F1 fraud, FN Cost, FP Cost, Total Cost, Cost Saving.  
   **EN:** Report PR-AUC, fraud recall, fraud precision, fraud F1, FN Cost, FP Cost, Total Cost, and Cost Saving.
 - **VI:** Báo cáo giải thích vì sao Accuracy không phù hợp với dữ liệu mất cân bằng.  
@@ -128,4 +120,4 @@ After each milestone:
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-05-26 after Phase 2.1 smoke-verified implementation*
+*Last updated: 2026-05-26 after Phase 3 smoke-verified implementation*

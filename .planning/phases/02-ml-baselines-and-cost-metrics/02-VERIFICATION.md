@@ -42,4 +42,39 @@ The notebook-only deliverable exists, runs in local smoke mode, and covers `BASE
 
 ## Remaining Risk
 
-Full dataset model training was not executed locally. This is acceptable for this execution because the notebook is configured to regenerate full outputs by setting `SAMPLE_ROWS = None`, while the local smoke run verifies the full flow without exhausting local resources.
+Full dataset and 100k model training were not executed locally. This is intentional: notebook 02 is now configured to regenerate outputs via `RUN_MODE="full"` or `RUN_MODE="sample_100k"`, while local verification only checked notebook JSON/code syntax and the previously verified smoke flow.
+
+
+## 2026-05-27 Static Verification Addendum
+
+| Check | Status | Evidence |
+|---|---|---|
+| `sample_100k` mode exists | PASS | `RUN_MODE_SAMPLE_ROWS["sample_100k"] = 100_000` in notebook 02 |
+| Tagged Phase 2 outputs | PASS | `baseline_metrics_{RUN_OUTPUT_TAG}.csv`, `threshold_tuning_{RUN_OUTPUT_TAG}.csv`, `confusion_matrices_{RUN_OUTPUT_TAG}.csv` |
+| Run metadata | PASS | `phase2_run_metadata_{RUN_OUTPUT_TAG}.json` |
+| Notebook JSON/code syntax | PASS | `ast.parse` over all code cells completed successfully on 2026-05-27 |
+
+Execution of `RUN_MODE="sample_100k"` is pending user-run Colab execution.
+
+## 2026-05-28 Execute Verification Addendum
+
+| Check | Status | Evidence |
+|---|---|---|
+| Default run mode for Colab plan | PASS | Notebook 02 now defaults to `RUN_MODE = "sample_100k"` |
+| Existing modes preserved | PASS | `smoke`, `sample_100k`, `sample_200k`, `sample_300k`, and `full` remain in `RUN_MODE_SAMPLE_ROWS` |
+| Notebook syntax | PASS | `ast.parse` over all code cells completed successfully on 2026-05-28 |
+| Stale outputs cleared | PASS | Notebook 02 has zero code cells with saved outputs after the execute update |
+
+No 100k/full execution was run locally; this remains a Colab execution step.
+
+## 2026-05-28 Gradual Sample Ladder Verification Addendum
+
+| Check | Status | Evidence |
+|---|---|---|
+| `sample_200k` mode exists | PASS | `RUN_MODE_SAMPLE_ROWS["sample_200k"] = 200_000` in notebook 02 |
+| `sample_300k` mode exists | PASS | `RUN_MODE_SAMPLE_ROWS["sample_300k"] = 300_000` in notebook 02 |
+| Sample-mode RAM guard | PASS | `N_JOBS = 1 if RUN_MODE.startswith("sample_") else 2` |
+| Tagged outputs remain mode-specific | PASS | Existing `baseline_metrics_{RUN_OUTPUT_TAG}.csv`, `threshold_tuning_{RUN_OUTPUT_TAG}.csv`, and metadata paths cover all sample modes |
+| Static verification | PASS | Notebook JSON/code syntax checked after adding the ladder |
+
+No 200k/300k/full execution was run locally; these are intended for user-run Colab execution.
