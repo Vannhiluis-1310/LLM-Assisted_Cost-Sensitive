@@ -20,6 +20,7 @@ The updated direction is a five-level evaluation framework centered on business 
 | 3.1 | Dynamic Cost-Sensitive Decision Policies | Implement the five-level framework, especially Level 3 global threshold and Level 4 amount-bin dynamic threshold. | POL-01..06, EVAL-01..04 |
 | 3.1b | Level 4 Dynamic Policy Tuning | Tune Level 4 candidates to reduce over-blocking in Cost-A/B while preserving the Cost-C gain. | POL-10..13, EVAL-01..04, EVAL-07 |
 | 3.2 | LLM-Assisted Hybrid Policy | After Level 4 is stable, test Level 5: LightGBM score + MiniLM embedding + dynamic hybrid policy. | POL-07..09, LLM-01..04 |
+| 3.3 | Advanced LLM-Augmented Hybrid Decision Framework | Strengthen Level 5 with real MiniLM embeddings, prototype similarity, hybrid score fusion, and meta-policy candidates. | LLM-06, POL-14..16, LEAK-07 |
 | 4 | Final Evaluation, Error Analysis, Report | Produce final result tables, figures, error analysis, and report using the five-level framework. | EVAL-01..06 |
 
 ## Updated Evaluation Framework
@@ -148,7 +149,7 @@ Therefore, the project must not claim that this closed-form threshold is dynamic
 
 ## Phase 3.2: LLM-Assisted Hybrid Policy
 
-**Status:** Complete for source/local fallback verification; Colab MiniLM rerun pending for final LLM claim.
+**Status:** Complete with Colab MiniLM `sample_100k` verification; Level 5 v1 matched but did not beat tuned Level 4.
 
 **Goal:** Test Level 5 by combining LightGBM risk score, MiniLM embedding, and a dynamic threshold/meta-policy.
 
@@ -161,11 +162,30 @@ Therefore, the project must not claim that this closed-form threshold is dynamic
 
 **Artifact:** `notebooks/05_llm_hybrid_policy.ipynb`
 
-**Execution Evidence:** Local `sample_100k` run completed with `tfidf_svd_fallback`, producing `results/phase32_*_sample_100k.csv`, `results/five_level_comparison_level5_sample_100k.csv`, and `reports/figures/phase32_*_sample_100k.png`. This verifies the flow but does not support a final LLM claim until Colab MiniLM output is generated.
+**Execution Evidence:** Colab `sample_100k` run completed with `embedding_backend_used = minilm`, producing `results/phase32_*_sample_100k.csv`, `results/five_level_comparison_level5_sample_100k.csv`, and `reports/figures/phase32_*_sample_100k.png`. The result is honest negative/neutral Level 5 v1 evidence: selected `gamma = 0.00`, so Level 5 matched tuned Level 4 on Cost-A/B/C and did not prove an LLM cost improvement.
+
+## Phase 3.3: Advanced LLM-Augmented Hybrid Decision Framework
+
+**Status:** Source complete/static verified; Colab MiniLM numeric run pending.
+
+**Goal:** Build a stronger Level 5 v2 notebook that uses real MiniLM embeddings and advanced hybrid decision policies to target lower Total Cost / higher Cost Saving than tuned Level 4 in at least two of three cost settings.
+
+**Success Criteria:**
+
+1. Notebook 06 uses MiniLM embeddings from neutral table-to-text or clearly labels any fallback as non-final.
+2. Main fraud/legit prototypes are computed from train embeddings only.
+3. Validation labels are used only for tuning weights, thresholds, and candidate selection.
+4. Test is report-only after Level 5 v2 policy selection is frozen.
+5. Level 5 v2 is compared against tuned Level 4 and Level 5 v1 on the same run mode.
+6. If Level 5 v2 does not beat Level 4 in at least two cost settings, the result is reported honestly.
+
+**Artifact:** `notebooks/06_llm_augmented_hybrid_v2.ipynb`
+
+**Execution Evidence:** Notebook 06 was created, outputs cleared, JSON parsed, and every code cell passed Python syntax checks. The notebook implements Level 5 v2 candidate families, validation-only selection, frozen test evaluation, `phase33_*` outputs, and the 0/3..3/3 claim guard. Final numeric evidence still requires running notebook 06 on Colab and confirming `embedding_backend_used = minilm`.
 
 ## Phase 4: Final Evaluation, Error Analysis, Report
 
-**Status:** Pending.
+**Status:** Pending after Phase 3.3 Colab MiniLM outputs are downloaded, or after deciding to keep Phase 3.2/3.3 source-level evidence as the final Level 5 attempt.
 
 **Goal:** Turn the pipeline into defensible final-report results.
 
@@ -204,8 +224,8 @@ Therefore, the project must not claim that this closed-form threshold is dynamic
 | 1 | Data pipeline, EDA, preprocessing | Split and preprocessing are reproducible |
 | 2 | Baselines, cost metrics, strong supervised baseline | Level 1/2 baseline table exists |
 | 3 | LLM/RL ablations and dynamic cost policies | Q-bandit ablation exists; Level 3/4 dynamic policy runs |
-| 4 | LLM-assisted hybrid policy and final report | Level 5 comparison, figures, error analysis, and report are complete |
+| 4 | Advanced LLM-assisted hybrid policy and final report | Level 5 v2 comparison, figures, error analysis, and report are complete |
 
 ---
 
-Last updated: 2026-05-29 after executing Phase 3.2 LLM-assisted hybrid policy source/local fallback verification.
+Last updated: 2026-05-30 after source-implementing Phase 3.3 advanced Level 5 v2 notebook.

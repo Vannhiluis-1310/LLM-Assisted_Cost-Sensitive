@@ -1,6 +1,6 @@
 # Trạng thái dự án / Project State
 
-Last activity: 2026-05-29 - Executed Phase 3.2 LLM-assisted hybrid policy source/local fallback verification
+Last activity: 2026-05-30 - Source-implemented Phase 3.3 advanced Level 5 v2 notebook
 
 ## Tham chiếu dự án / Project Reference
 
@@ -9,7 +9,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-25)
 **Giá trị cốt lõi / Core value:** Xây dựng được pipeline thực nghiệm chạy lại được, so sánh được baseline ML với RL cost-sensitive bằng metrics fraud và chi phí kinh tế.  
 **Core value:** Build a reproducible experimental pipeline that compares ML baselines with cost-sensitive RL using fraud metrics and economic cost metrics.
 
-**Trọng tâm hiện tại / Current focus:** Prepare Phase 3.2 Colab MiniLM rerun and Phase 4 final analysis
+**Trọng tâm hiện tại / Current focus:** Run `notebooks/06_llm_augmented_hybrid_v2.ipynb` on Colab with MiniLM and download `phase33_*` outputs
 
 ## Trạng thái / Status
 
@@ -43,7 +43,9 @@ See: `.planning/PROJECT.md` (updated 2026-05-25)
 | Phase 3.1b planning / Lập kế hoạch Phase 3.1b | Complete |
 | Phase 3.1b Level 4 tuning / Tinh chỉnh Level 4 | Complete (sample_100k verified) |
 | Phase 3.2 planning / Lập kế hoạch Phase 3.2 | Complete |
-| Phase 3.2 LLM-assisted hybrid policy / Chính sách hybrid có LLM | Complete (source/local fallback verified; Colab MiniLM run pending for final claim) |
+| Phase 3.2 LLM-assisted hybrid policy / Chính sách hybrid có LLM | Complete (Colab MiniLM sample_100k verified; Level 5 v1 matched but did not beat Level 4) |
+| Phase 3.3 planning / Advanced LLM-augmented hybrid decision framework | Complete |
+| Phase 3.3 implementation / Level 5 v2 advanced hybrid policy | Complete (source/static verified; Colab MiniLM numeric run pending) |
 | Phase 4 implementation / Triển khai Phase 4 | Pending |
 
 ## Phase 1 Verification Snapshot
@@ -99,10 +101,15 @@ See: `.planning/PROJECT.md` (updated 2026-05-25)
 | `.planning/phases/03.2-llm-assisted-hybrid-policy/03.2-SUMMARY.md` | Phase 3.2 implementation summary |
 | `.planning/phases/03.2-llm-assisted-hybrid-policy/03.2-VERIFICATION.md` | Phase 3.2 execution verification |
 | `notebooks/05_llm_hybrid_policy.ipynb` | Phase 3.2 Level 5 LLM-assisted hybrid policy notebook |
-| `results/phase32_hybrid_candidate_metrics_sample_100k.csv` | Phase 3.2 Level 5 candidate metrics from local fallback run |
+| `results/phase32_hybrid_candidate_metrics_sample_100k.csv` | Phase 3.2 Level 5 candidate metrics from Colab MiniLM sample_100k run |
 | `results/phase32_selected_policy_sample_100k.csv` | Selected Level 5 policy per cost config |
 | `results/five_level_comparison_level5_sample_100k.csv` | Five-level comparison with Level 5 rows |
 | `results/phase32_run_metadata_sample_100k.json` | Phase 3.2 metadata and claim guard |
+| `.planning/phases/03.3-advanced-llm-augmented-hybrid-decision-framework/03.3-CONTEXT.md` | Phase 3.3 context and leakage-safe decisions |
+| `.planning/phases/03.3-advanced-llm-augmented-hybrid-decision-framework/03.3-PLAN.md` | Phase 3.3 plan for `notebooks/06_llm_augmented_hybrid_v2.ipynb` |
+| `.planning/phases/03.3-advanced-llm-augmented-hybrid-decision-framework/03.3-SUMMARY.md` | Phase 3.3 source implementation summary |
+| `.planning/phases/03.3-advanced-llm-augmented-hybrid-decision-framework/03.3-VERIFICATION.md` | Phase 3.3 source/static verification |
+| `notebooks/06_llm_augmented_hybrid_v2.ipynb` | Phase 3.3 advanced Level 5 v2 notebook |
 
 Generated outputs such as `data/processed/`, `results/`, `reports/figures/`, and `artifacts/` were intentionally removed during cleanup. They should be regenerated from `notebooks/01_data_check.ipynb` when needed.
 
@@ -124,7 +131,9 @@ Phase 2 regenerated `results/` and `reports/figures/` during smoke verification.
 - First Phase 3.1 results suggest Level 4 is useful in Cost-C but can over-block in Cost-A/B. Phase 3.1b must tune this trade-off before Phase 3.2 claims.
 - Phase 3.1b sample results improve the over-blocking story, but they are still `sample_100k`; final report should label the run mode clearly unless larger/full outputs are regenerated.
 - The Phase 3.1b local execution wrapper timed out after printing completion; post-run validation confirmed all expected outputs were written.
-- Phase 3.2 local run used `tfidf_svd_fallback`, selected gamma `0.00`, and matched tuned Level 4 exactly on Cost-A/B/C. This is a flow verification only; final LLM claim still requires Colab MiniLM output.
+- Phase 3.2 Colab run used `minilm`, selected gamma `0.00`, and matched tuned Level 4 exactly on Cost-A/B/C. This is valid Level 5 v1 evidence, but it does not support an LLM-improves-cost claim.
+- Phase 3.3 targets a stronger Level 5 v2, but the 2/3 cost-setting improvement is an aspirational target, not a guaranteed claim. Train-only prototypes and validation-only tuning are required to avoid leakage.
+- Phase 3.3 source is implemented and syntax-verified, but final numeric evidence still requires a Colab MiniLM run. If `phase33_run_metadata_sample_100k.json` reports `tfidf_svd_fallback`, treat it as smoke-only.
 - Full Kaggle/FraudSquad SOTA reproduction is out of scope. It remains an external reference unless explicitly scoped and reproduced.
 
 ## Quick Tasks Completed
@@ -139,13 +148,14 @@ Phase 2 regenerated `results/` and `reports/figures/` during smoke verification.
 
 ## Bước tiếp theo / Next Step
 
-Run Phase 3.2 on Colab with MiniLM:
+Run Phase 3.3 on Colab:
 
-1. Open `notebooks/05_llm_hybrid_policy.ipynb`.
-2. Keep `RUN_MODE = "sample_100k"` to match current Phase 2/3.1b outputs.
-3. Run all cells and confirm `results/phase32_run_metadata_sample_100k.json` records `embedding_backend_used = "minilm"`.
-4. Download updated `results/phase32_*`, `results/five_level_comparison_level5_sample_100k.csv`, and `reports/figures/phase32_*`.
-5. Start Phase 4 final evaluation and report writing.
+1. Open `notebooks/06_llm_augmented_hybrid_v2.ipynb`.
+2. Keep `RUN_MODE = "sample_100k"` for the first run.
+3. Run all cells on Colab/GPU.
+4. Confirm `results/phase33_run_metadata_sample_100k.json` records `embedding_backend_used = "minilm"`.
+5. Download `results/phase33_*_sample_100k.*`, `results/five_level_comparison_level5_v2_sample_100k.csv`, and `reports/figures/phase33_*_sample_100k.png`.
+6. Use the win count in `phase33_level5_v2_vs_level4_sample_100k.csv` to decide whether Level 5 v2 supports the LLM claim.
 
 ## Accumulated Context
 
@@ -168,6 +178,9 @@ Run Phase 3.2 on Colab with MiniLM:
 - Phase 3.1b executed 2026-05-29: created `notebooks/04b_dynamic_policy_tuning.ipynb`, generated `phase31b_*_sample_100k` outputs, and improved guarded selector precision/FP-cost trade-off versus Phase 3.1 Level 4.
 - Phase 3.2 planned 2026-05-29: Level 5 will use LightGBM score + MiniLM embedding in `notebooks/05_llm_hybrid_policy.ipynb`, compared directly against tuned Level 4.
 - Phase 3.2 executed 2026-05-29: created `notebooks/05_llm_hybrid_policy.ipynb`, locally ran `sample_100k` with `tfidf_svd_fallback`, produced `phase32_*` outputs, and verified the claim guard requiring MiniLM for final LLM claims.
+- Phase 3.2 Colab MiniLM output verified 2026-05-30: downloaded `phase32_*_sample_100k` files record `embedding_backend_used = minilm`; selected Level 5 v1 matched tuned Level 4 on all three cost settings and did not improve cost.
+- Phase 3.3 planned 2026-05-30: add advanced Level 5 v2 in `notebooks/06_llm_augmented_hybrid_v2.ipynb` with train-only prototype similarity, hybrid score fusion, and compact meta-policy candidates.
+- Phase 3.3 executed 2026-05-30: created `notebooks/06_llm_augmented_hybrid_v2.ipynb`, added advanced Level 5 v2 candidate families, `phase33_*` output code, disagreement analysis, and claim guard; static notebook verification passed.
 
 ## Session Continuity
 
@@ -194,6 +207,8 @@ Latest Phase 3.1 fix: 2026-05-29 - hardened notebook 04 Colab project-root and s
 Latest Phase 3.1 Drive alignment: 2026-05-29 - updated notebook 04 to mount Google Drive and default to `/content/drive/MyDrive/BaoMatCuoiKy/LLM-Assisted_Cost-Sensitive`.
 Latest Phase 3.1b planning: 2026-05-29 - created context, plan, and verification for Level 4 tuning via `notebooks/04b_dynamic_policy_tuning.ipynb`.
 Latest Phase 3.1b execution: 2026-05-29 - created and locally verified `notebooks/04b_dynamic_policy_tuning.ipynb`; generated tuned Level 4 outputs for `sample_100k`.
-Latest Phase 3.2 execution: 2026-05-29 - created and locally verified `notebooks/05_llm_hybrid_policy.ipynb`; local fallback output matched tuned Level 4, so final LLM claim requires Colab MiniLM rerun.
-Stopped at: Phase 3.2 source/local fallback verification complete; next step is run notebook 05 on Colab with MiniLM, then Phase 4.
+Latest Phase 3.2 execution: 2026-05-30 - verified downloaded Colab MiniLM `sample_100k` outputs for `notebooks/05_llm_hybrid_policy.ipynb`; Level 5 v1 matched tuned Level 4, so Phase 3.3 remains the next improvement path.
+Latest Phase 3.3 planning: 2026-05-30 - created context, plan, and verification for `notebooks/06_llm_augmented_hybrid_v2.ipynb`.
+Latest Phase 3.3 execution: 2026-05-30 - created and static-verified `notebooks/06_llm_augmented_hybrid_v2.ipynb`; Colab MiniLM numeric run is pending.
+Stopped at: Phase 3.3 source complete; next step is run notebook 06 on Colab with MiniLM and download `phase33_*` outputs.
 Resume file: `.planning/STATE.md`

@@ -50,6 +50,7 @@ Q-bandit without/with MiniLM remains as ablation evidence.
 - [x] **LLM-03:** Include local embeddings using `sentence-transformers/all-MiniLM-L6-v2`; fallback must be clearly labeled if MiniLM is unavailable.
 - [x] **LLM-04:** Embeddings are cached and joined to the correct split; dimensionality reduction is fit on train only.
 - [x] **LLM-05:** Level 5 hybrid policy must use MiniLM embedding only as an additional representation, not as a source of labels, model scores, or risk-wording leakage.
+- [ ] **LLM-06:** Advanced Level 5 v2 must use true MiniLM embeddings for final claims; fallback embeddings may verify code flow only.
 
 ## RL / Bandit Ablation Requirements
 
@@ -76,6 +77,9 @@ Q-bandit without/with MiniLM remains as ablation evidence.
 - [x] **POL-11:** Phase 3.1b must include at least one guard against false-positive explosion, such as a validation precision floor, FP-cost cap, or threshold shrinkage toward the global threshold.
 - [x] **POL-12:** Any modified expected-cost policy that adds fixed review/lost-sale cost must be labeled as a diagnostic alternative cost model and must not replace the original `TransactionAmt * alpha/beta` formulation.
 - [x] **POL-13:** Phase 3.1b candidate selection must be based on validation metrics only, with selected hyperparameters and fallbacks saved to metadata before test evaluation.
+- [x] **POL-14:** Level 5 v2 must include at least two advanced hybrid candidate families beyond simple similarity adjustment, such as score fusion and a compact meta-policy.
+- [x] **POL-15:** Level 5 v2 must compare against tuned Level 4 and Level 5 v1 on the same run mode, split, cost configuration, and metric set.
+- [x] **POL-16:** Level 5 v2 must report whether it beats tuned Level 4 in 0/3, 1/3, 2/3, or 3/3 cost settings without overstating the result.
 
 ## Evaluation Requirements
 
@@ -95,6 +99,7 @@ Q-bandit without/with MiniLM remains as ablation evidence.
 - [x] **LEAK-04:** Derive amount-bin boundaries without using test labels or test metric optimization.
 - [x] **LEAK-05:** Test is report-only for final metrics.
 - [x] **LEAK-06:** LLM/table-to-text must not include labels, model scores, risk adjectives, or unsupported interpretation of `ProductCD`.
+- [x] **LEAK-07:** Main Level 5 v2 prototypes and representation transforms must be fit on train only; validation labels may tune thresholds/weights, and test labels are report-only.
 
 ## Out of Scope
 
@@ -122,22 +127,25 @@ Q-bandit without/with MiniLM remains as ablation evidence.
 | BASE-01..05 | Phase 2 | Complete |
 | BASE-06..07 | Phase 2.1 | Complete |
 | LLM-01..04 | Phase 3 | Complete |
-| LLM-05 | Phase 3.2 | Source complete; local fallback verified; final MiniLM run pending for claim |
+| LLM-05 | Phase 3.2 | Complete with Colab MiniLM `sample_100k` output; fallback remains smoke-only |
+| LLM-06 | Phase 3.3 | Source implemented; pending Colab MiniLM numeric run for final claim |
 | RL-01..07 | Phase 3 | Complete as ablation evidence |
 | POL-01..06 | Phase 3.1 | Complete |
 | POL-10..13 | Phase 3.1b | Complete |
-| POL-07..09 | Phase 3.2 | Complete; local fallback result was honestly reported |
+| POL-07..09 | Phase 3.2 | Complete; Colab MiniLM result was honestly reported as matching, not beating, Level 4 |
+| POL-14..16 | Phase 3.3 | Source complete in notebook 06; numeric outputs pending Colab run |
 | EVAL-01..07 | Phase 4 | Pending |
 | LEAK-01..02 | Phase 1/2/3 | Complete |
 | LEAK-03..05 | Phase 3.1/3.1b | Complete |
-| LEAK-06 | Phase 3/3.2 | Complete for Level 5 local run; rerun audit when Colab MiniLM output is generated |
+| LEAK-06 | Phase 3/3.2 | Complete for Level 5 Colab MiniLM run; text leakage audit passed |
+| LEAK-07 | Phase 3.3 | Source complete in notebook 06 |
 
 ## Coverage
 
 - Completed foundation: data, preprocessing, baseline ML, strong supervised baseline, LLM/RL ablation.
-- New pending work: amount-bin dynamic policy and LLM-assisted hybrid policy.
+- New pending work: run advanced Level 5 v2 notebook on Colab with MiniLM, then final evaluation/report.
 - No requirement asks to restart Phase 1/2.
 
 ---
 
-Last updated: 2026-05-29 after executing Phase 3.2 Level 5 hybrid policy source/local fallback verification.
+Last updated: 2026-05-30 after source-implementing Phase 3.3 advanced Level 5 v2 notebook.

@@ -76,7 +76,31 @@
 - [x] Compare Level 5 directly against tuned Level 4 on the same split and run mode.
 - [x] Save Level 5 rows into `results/five_level_comparison_level5_{RUN_MODE}.csv`.
 - [x] If Level 5 does not beat Level 4, document it as an honest ablation outcome.
-- [ ] Run notebook 05 on Colab with `embedding_backend_used = "minilm"` for final LLM claim.
+- [x] Run notebook 05 on Colab with `embedding_backend_used = "minilm"` and document that Level 5 v1 matched, but did not beat, tuned Level 4.
+
+## Phase 3.3: Advanced LLM-Augmented Hybrid Decision Framework
+
+- [x] Plan Phase 3.3 in `.planning/phases/03.3-advanced-llm-augmented-hybrid-decision-framework/03.3-PLAN.md`.
+- [x] Create `notebooks/06_llm_augmented_hybrid_v2.ipynb`.
+- [x] Load tuned Level 4 comparator from Phase 3.1b.
+- [x] Load Level 5 v1 outputs from Phase 3.2 if available.
+- [/] Regenerate or reuse true MiniLM embeddings on Colab; source implemented, numeric Colab run pending.
+- [x] Improve neutral table-to-text serializer and rerun leakage audit.
+- [x] Implement train-only fraud prototype similarity features.
+- [x] Implement fraud-minus-legit similarity threshold adjustment.
+- [x] Implement hybrid score fusion using LightGBM score, similarity, and amount.
+- [x] Implement compact Logistic Regression meta-policy.
+- [ ] Optionally implement a small 2-layer MLP meta-policy.
+- [x] Tune all candidate parameters on validation only in notebook source.
+- [x] Evaluate frozen selected policies on test in notebook source.
+- [x] Compare Level 5 v2 against tuned Level 4 and Level 5 v1 in notebook source.
+- [/] Save `results/phase33_llm_hybrid_metrics_{RUN_MODE}.csv`; save code implemented, Colab output pending.
+- [/] Save `results/phase33_selected_policy_{RUN_MODE}.csv`; save code implemented, Colab output pending.
+- [/] Save `results/phase33_disagreement_analysis_{RUN_MODE}.csv`; save code implemented, Colab output pending.
+- [/] Save `results/five_level_comparison_level5_v2_{RUN_MODE}.csv`; save code implemented, Colab output pending.
+- [/] Add Phase 3.3 figures for Total Cost, Cost Saving, and disagreement impact; figure code implemented, Colab output pending.
+- [x] Report whether Level 5 v2 beats Level 4 in 0/3, 1/3, 2/3, or 3/3 cost settings in notebook claim guard.
+- [ ] Run notebook 06 on Colab with MiniLM and download `phase33_*_sample_100k` outputs.
 
 ## Final Evaluation and Report
 
@@ -103,4 +127,4 @@
 
 ---
 
-Last updated: 2026-05-29.
+Last updated: 2026-05-30.
