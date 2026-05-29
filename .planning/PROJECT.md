@@ -1,4 +1,4 @@
-# LLM-Assisted Cost-Sensitive RL for E-commerce Fraud Detection
+# Dynamic Cost-Sensitive Decision Framework for Imbalanced E-commerce Transaction Fraud Detection with LLM Representation Enhancement
 
 ## Đây là gì / What This Is
 

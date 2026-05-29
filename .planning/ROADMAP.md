@@ -1,4 +1,4 @@
-# Roadmap: LLM-Assisted Cost-Sensitive Fraud Decision Policies
+# Roadmap: Dynamic Cost-Sensitive Decision Framework for Imbalanced E-commerce Transaction Fraud Detection with LLM Representation Enhancement
 
 ## Overview
 

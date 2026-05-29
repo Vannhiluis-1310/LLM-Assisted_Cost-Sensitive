@@ -5,9 +5,9 @@
 Repository này dùng cho đồ án cuối kỳ.  
 This repository is for the final project.
 
-**Tiếng Việt:** Ứng dụng LLM hỗ trợ học tăng cường nhạy cảm chi phí trong phát hiện gian lận giao dịch thương mại điện tử trên dữ liệu mất cân bằng.
+**Tiếng Việt:** Khung ra quyết định nhạy cảm chi phí động cho phát hiện gian lận giao dịch thương mại điện tử mất cân bằng với sự tăng cường biểu diễn LLM.
 
-**English:** LLM-Assisted Cost-Sensitive Reinforcement Learning for E-commerce Transaction Fraud Detection on Imbalanced Data.
+**English:** Dynamic Cost-Sensitive Decision Framework for Imbalanced E-commerce Transaction Fraud Detection with LLM Representation Enhancement.
 
 ## Phạm vi không được vượt / Non-negotiable Scope
 

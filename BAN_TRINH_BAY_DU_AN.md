@@ -1,7 +1,7 @@
 # Bản trình bày dự án
 
-**Đề tài:** Ứng dụng LLM hỗ trợ học tăng cường nhạy cảm chi phí trong phát hiện gian lận giao dịch thương mại điện tử trên dữ liệu mất cân bằng  
-**Tên tiếng Anh:** LLM-Assisted Cost-Sensitive Reinforcement Learning for E-commerce Transaction Fraud Detection on Imbalanced Data  
+**Đề tài:** Khung ra quyết định nhạy cảm chi phí động cho phát hiện gian lận giao dịch thương mại điện tử mất cân bằng với sự tăng cường biểu diễn LLM  
+**Tên tiếng Anh:** Dynamic Cost-Sensitive Decision Framework for Imbalanced E-commerce Transaction Fraud Detection with LLM Representation Enhancement  
 **Môn:** Bảo mật Thương mại Điện tử  
 **Trạng thái hiện tại:** Dự án đã có kế hoạch, yêu cầu, roadmap và khung Phase 1 cho data pipeline, EDA, preprocessing. Các phần baseline ML, embedding, RL và đánh giá chi phí là phần triển khai tiếp theo.
 

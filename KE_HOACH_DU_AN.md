@@ -4,8 +4,8 @@
 
 | Ngôn ngữ / Language | Tên đề tài / Title |
 |---|---|
-| Tiếng Việt / Vietnamese | Ứng dụng LLM hỗ trợ học tăng cường nhạy cảm chi phí trong phát hiện gian lận giao dịch thương mại điện tử trên dữ liệu mất cân bằng |
-| Tiếng Anh / English | LLM-Assisted Cost-Sensitive Reinforcement Learning for E-commerce Transaction Fraud Detection on Imbalanced Data |
+| Tiếng Việt / Vietnamese | Khung ra quyết định nhạy cảm chi phí động cho phát hiện gian lận giao dịch thương mại điện tử mất cân bằng với sự tăng cường biểu diễn LLM |
+| Tiếng Anh / English | Dynamic Cost-Sensitive Decision Framework for Imbalanced E-commerce Transaction Fraud Detection with LLM Representation Enhancement |
 
 ## 2. Problem Statement / Phát biểu bài toán
 

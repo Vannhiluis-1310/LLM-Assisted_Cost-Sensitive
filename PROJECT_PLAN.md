@@ -2,9 +2,9 @@
 
 ## Project Title
 
-**Vietnamese:** Ung dung LLM ho tro chinh sach quyet dinh nhay cam chi phi trong phat hien gian lan giao dich thuong mai dien tu tren du lieu mat can bang.
+**Vietnamese:** Khung ra quyet dinh nhay cam chi phi dong cho phat hien gian lan giao dich thuong mai dien tu mat can bang voi su tang cuong bieu dien LLM.
 
-**English:** LLM-Assisted Cost-Sensitive Fraud Decision Policies for E-commerce Transaction Fraud Detection on Imbalanced Data.
+**English:** Dynamic Cost-Sensitive Decision Framework for Imbalanced E-commerce Transaction Fraud Detection with LLM Representation Enhancement.
 
 ## Current Decision
 

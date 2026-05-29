@@ -1,4 +1,4 @@
-# Requirements: LLM-Assisted Cost-Sensitive Fraud Decision Policies
+# Requirements: Dynamic Cost-Sensitive Decision Framework for Imbalanced E-commerce Transaction Fraud Detection with LLM Representation Enhancement
 
 **Defined:** 2026-05-24  
 **Last Updated:** 2026-05-29  
